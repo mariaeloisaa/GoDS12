@@ -8,51 +8,98 @@
   width: 90%;
   max-width: 800px;
 
-  
-  background: rgba(160, 160, 160, 0.5); 
+  background: rgba(0, 0, 0, 0.6); // contraste melhor
   backdrop-filter: blur(10px); 
 
   border-radius: 0.5rem;
   padding: 1rem;
+  z-index: 1000;
+
+  ul {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  li {
+    flex: 1 1 80px;
+    text-align: center;
+  }
+
+  figure {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 0;
+    color: #fff;
+    font-size: 1rem;
+    cursor: pointer;
+
+    img {
+      width: 60px;
+      height: auto;
+      margin-bottom: 0.5rem;
+      transition: transform 0.3s ease;
+    }
+
+    figcaption {
+      font-size: 0.9rem;
+      color: #fff;
+    }
+
+    &:hover img,
+    &:focus img {
+      transform: scale(1.2);
+    }
+
+    a:focus & {
+      outline: 3px solid #fff; 
+      outline-offset: 4px;
+    }
+  }
+
+  // Responsividade tablets
+  @media (max-width: 768px) {
+    ul {
+      gap: 0.8rem;
+    }
+
+    figure {
+      img {
+        width: 50px;
+      }
+
+      figcaption {
+        font-size: 0.85rem;
+      }
+    }
+  }
+
+  // Responsividade celulares
+  @media (max-width: 480px) {
+    width: 95%;
+    padding: 0.8rem;
+
+    ul {
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+
+    figure {
+      flex: 1 1 60px;
+
+      img {
+        width: 45px;
+      }
+
+      figcaption {
+        font-size: 0.8rem;
+      }
+    }
+  }
 }
-
-.menu ul {
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-  gap: 1.5rem;
-  flex-wrap: wrap; 
-  list-style: none;
-  margin: 0;
-  padding: 0;
-}
-
-.menu li {
-  flex: 1 1 100px; 
-  text-align: center;
-}
-
-.menu figure {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin: 0;
-  color: white;
-  font-size: 1rem;
-}
-
-.menu img {
-  width: 60px;
-  height: auto;
-  margin-bottom: 0.5rem;
-  
-  
-  transition: transform 0.3s ease; 
-}
-
-
-.menu img:hover,
-.menu figure:hover img {
-  transform: scale(1.2); 
-}
-
