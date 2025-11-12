@@ -40,7 +40,7 @@ export function Menu() {
 
         <li>
           {/* Camera */}
-          <Link to="/camera" aria-label="Abrir Câmera">
+          <Link to="camera" aria-label="Abrir Câmera">
             <figure>
               <img src={camera} alt="Ícone de Câmera" loading="lazy" />
               <figcaption>Câmera</figcaption>

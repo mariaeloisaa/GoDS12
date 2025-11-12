@@ -1,0 +1,39 @@
+section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 80vh;
+  text-align: center;
+
+  h2 {
+    margin-bottom: 1.5rem;
+    font-size: 1.5rem;
+    color: #ffffff;
+  }
+
+  div {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 1rem;
+
+    video,
+    img {
+      max-width: 100%;
+      width: 400px;
+      height: auto;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+      background: #000;
+    }
+  }
+
+  button {
+    margin-top: 1rem;
+  }
+
+  canvas {
+    display: none;
+  }
+}
