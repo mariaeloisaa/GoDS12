@@ -1,39 +1,38 @@
-section {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  min-height: 80vh;
+
+
+.camera-section {
+  width: 100%;
+  max-width: 420px;
+  margin: 30px auto;
+  padding: 20px;
+
+  background: #ffffffd9;          // fundo suave
+  backdrop-filter: blur(6px);     // efeito vidro fosco
+  border-radius: 14px;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.15);
+
   text-align: center;
 
   h2 {
-    margin-bottom: 1.5rem;
-    font-size: 1.5rem;
-    color: #ffffff;
+    margin-bottom: 15px;
+    font-size: 1.4rem;
+    color: #333;
   }
 
-  div {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin-bottom: 1rem;
+  video,
+  img {
+    width: 100%;
+    border-radius: 12px;
+    border: 2px solid #e5e5e5;
+    box-shadow: 0 3px 12px rgba(0, 0, 0, 0.15);
+  }
 
-    video,
-    img {
-      max-width: 100%;
-      width: 400px;
-      height: auto;
-      border-radius: 8px;
-      box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-      background: #000;
+  .camera-buttons {
+    margin-top: 18px;
+
+    
+    button {
+      margin: 0 6px;
     }
-  }
-
-  button {
-    margin-top: 1rem;
-  }
-
-  canvas {
-    display: none;
   }
 }

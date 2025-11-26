@@ -4,6 +4,7 @@ import inventario from '../assets/inventario.png';
 import camera from '../assets/camera.png';
 import { Link } from 'react-router-dom';
 
+
 export function Menu() {
   return (
     <nav className="menu" aria-label="Menu principal">
@@ -20,7 +21,7 @@ export function Menu() {
 
         <li>
           {/* Inventário */}
-          <Link to="/inventario" aria-label="Abrir Inventário">
+          <Link to="inventario" aria-label="Abrir Inventário">
             <figure>
               <img src={inventario} alt="Ícone de Inventário" loading="lazy" />
               <figcaption>Inventário</figcaption>

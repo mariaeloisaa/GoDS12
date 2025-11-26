@@ -1,74 +1,70 @@
 import { useState, useEffect, useRef } from "react";
-import '../Style/camera.scss';
-
-
-export function Camera({onfotoTirada}){
+import "../Style/camera.scss"
+ 
+export function Camera({ onfotoTirada }) {
     const videoRef = useRef(null);
     const canvasRef = useRef(null);
     const [foto, setFoto] = useState(null);
-
-    // effect inicializa com a camera ligada
-    useEffect(()=>{
+ 
+    //Effect (inicializa com a camera ligada)
+    useEffect(() => {
         iniciarCamera();
-    },[]);
-
-    //inicializar camera
-    const iniciarCamera = async()=>{
-        try{
-            const stream = await navigator.mediaDevices.getUserMedia({video:true});
-            if(videoRef.current){
+    }, []);
+ 
+    //Inicializar Camera
+    const iniciarCamera = async () => {
+        try {
+            const stream = await navigator.mediaDevices.getUserMedia({ video: true });
+            if (videoRef.current) {
                 videoRef.current.srcObject = stream;
             }
-        }catch(error){
-            console.error("Erro ao acessar a camera", error)
+        } catch (error) {
+            console.error("Erro ao acessar a camera", error);
         }
     };
-
+ 
     //tirar foto
-    const tirarFoto = ()=>{
+    const tirarFoto = () => {
         const video = videoRef.current;
         const canvas = canvasRef.current;
-        const foto2d = canvas.getContext("2d");
-
+        const foto2d = canvas.getContext("2d"); // corrigido
+ 
         canvas.width = video.videoWidth;
         canvas.height = video.videoHeight;
-
-
-        foto2d.drawImage(video, 0,0, video.videoWidth, video.videoHeight );
-
+ 
+        foto2d.drawImage(video, 0, 0, video.videoWidth, video.videoHeight);
+ 
         const imagem = canvas.toDataURL("image/png");
         setFoto(imagem);
-
-        if (onfotoTirada){
-            onfotoTirada(imagem) // envia para props caso necessario
+ 
+        if (onfotoTirada) {
+            onfotoTirada(imagem); //envia isso para a props caso necessario
         }
-    }
-
-    const reiniciar = ()=>{
+    };
+ 
+    const reiniciar = () => {
         setFoto(null);
         iniciarCamera();
-    }
-
-    return(
-        <section className="camera-box">
-            <h2>Captura de Imagem</h2>
-            <div className="preview">
-                {
-                    !foto?(
-                        <video ref={videoRef} autoPlay playsInline aria-label="Fluxo de Câmera"/>
-                    ):(
-                        <img src={foto} alt="Foto tirada"/>
-                    )
-                }
-            </div>
+    };
+ 
+    return (
+        <section className="camera-section">
+            <h2>Captura de imagem</h2>
             <div>
-                {!foto?(
-                    <button type='button' onClick={tirarFoto}>Tirar Foto</button>
-                ):(
-                    <button type='button' onClick={reiniciar}>Nova Foto</button>
+                {!foto ? (
+                    <video ref={videoRef} autoPlay playsInline aria-label="fluxo de camera" />
+                ) : (
+                    <img src={foto} alt="foto Tirada" />
                 )}
             </div>
-            <canvas ref={canvasRef} style={{display:"none"}}></canvas>
+            <div className="camera-buttons">
+                {!foto ? (
+                    <button type="button" onClick={tirarFoto}>Tirar Foto</button>
+                ) : (
+                    <button type="button" onClick={reiniciar}>Nova Foto</button>
+                )}
+            </div>
+            <canvas ref={canvasRef} style={{ display: "none" }}></canvas>
         </section>
     );
 }

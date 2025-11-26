@@ -1,0 +1,128 @@
+/* Container principal */
+.inventario {
+  max-width: 1100px;
+  margin: 2.5rem auto;
+  padding: 1.5rem;
+  color: #ffffff;
+  text-align: center;
+}
+ 
+/* título e botão limpar */
+.inventario > h2 {
+  font-size: 1.8rem;
+  margin-bottom: 0.75rem;
+}
+ 
+.limpar-inventario {
+  background: #d9534f;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 24px;
+  cursor: pointer;
+  font-weight: 700;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.35);
+  transition: transform .12s ease, background .12s ease;
+  margin-bottom: 1rem;
+  display: inline-block;
+ 
+  &:hover {
+    transform: translateY(-3px);
+    background: #c64541;
+  }
+ 
+  &:focus {
+    outline: 3px solid #ffd700;
+    outline-offset: 4px;
+  }
+}
+ 
+/* estado vazio */
+.vazio {
+  color: rgba(255,255,255,0.7);
+  margin-top: 1rem;
+  font-size: 1rem;
+}
+ 
+/* GRID */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+  gap: 1rem;
+  align-items: start;
+  margin-top: 1rem;
+  justify-items: center;
+}
+ 
+/* cartão da figurinha */
+.figurinha {
+  background: rgba(255,255,255,0.03);
+  padding: 0.6rem;
+  border-radius: 12px;
+  width: 100%;
+  max-width: 160px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform .12s ease, box-shadow .12s ease;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.25);
+ 
+  &:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.35);
+  }
+ 
+  /* tamanho da figurinha */
+  img {
+    display: block;
+    width: 100%;
+    max-width: 96px;   /* <-- AJUSTE O TAMANHO AQUI */
+    height: auto;
+    object-fit: contain;
+    border-radius: 8px;
+  }
+}
+ 
+/* caso queira figurinha maior */
+.figurinha--big img {
+  max-width: 140px;
+}
+ 
+/* responsividade */
+@media (max-width: 900px) {
+  .grid {
+    grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+  }
+ 
+  .figurinha {
+    max-width: 140px;
+  }
+ 
+  .figurinha img {
+    max-width: 84px;
+  }
+}
+ 
+@media (max-width: 480px) {
+  .inventario {
+    padding: 1rem;
+    margin: 1.25rem auto;
+  }
+ 
+  .grid {
+    gap: 0.7rem;
+  }
+ 
+  .figurinha {
+    max-width: 120px;
+    padding: 0.5rem;
+  }
+ 
+  .figurinha img {
+    max-width: 72px;
+  }
+ 
+  .limpar-inventario {
+    width: 100%;
+  }
+}
