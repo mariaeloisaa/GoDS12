@@ -20,6 +20,18 @@ export function MissaoModal({ missao, onClose, onConcluir }) {
     return () => document.removeEventListener("keydown", handleKeyDown);
   }, [onClose]);
 
+  // Função para salvar a figurinha no inventário
+  const salvarNoInventario = (imagem, nome) => {
+    const novoItem = {
+      id: Date.now(),  // Criando um ID único com base no timestamp
+      imagem,
+      nome,
+    };
+
+    const inventario = JSON.parse(localStorage.getItem("inventario")) || [];
+    inventario.push(novoItem);
+    localStorage.setItem("inventario", JSON.stringify(inventario));
+  };
 
   // Verificar Resposta
   const verificarResposta = () => {
@@ -34,10 +46,12 @@ export function MissaoModal({ missao, onClose, onConcluir }) {
     ) {
       setResultado("Resposta correta! Parabéns!");
       setStatus("sucesso");
-      setTimeout(() => onConcluir(missao.id), 1000);
+      salvarNoInventario(sucesso, "Missão Concluída com Sucesso");
+      setTimeout(() => onConcluir("sucesso"), 1000);
     } else {
       setResultado("Resposta incorreta. Tente novamente!");
       setStatus("erro");
+      salvarNoInventario(erro, "Missão Erro");
     }
   };
 

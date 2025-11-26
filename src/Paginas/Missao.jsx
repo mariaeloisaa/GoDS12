@@ -2,7 +2,8 @@ import { useState, useEffect, useRef } from "react";
 import { missoes } from "../Dados/dadosMissao";
 import { MissaoCard } from "../Componentes/MissaoCard";
 import { MissaoModal } from "../Componentes/MissaoModal";
-import { figurinhas } from "../Dados/dadosInventario";
+import sucesso from "../assets/correto.jpg";
+import erro from "../assets/incorreto.jpg"; // Imagens de sucesso e erro
 
 export function Missao() {
   const [missaoSelecionada, setMissaoSelecionada] = useState(null);
@@ -18,22 +19,29 @@ export function Missao() {
     localStorage.setItem("missoesConcluidas", JSON.stringify(missoesConcluidas));
   }, [missoesConcluidas]);
 
-  const salvarFigurinha = (missao) => {
-  const inventario = JSON.parse(localStorage.getItem("inventario")) || [];
+  // Função para salvar a figurinha no inventário com base no resultado
+  const salvarFigurinha = (missao, status) => {
+    const inventario = JSON.parse(localStorage.getItem("inventario")) || [];
 
-  // pega a figurinha correspondente à missão concluída
-  const figurinha = figurinhas.find((f) => f.id === missao.id);
+    // A figurinha a ser salva será definida com base no status (sucesso ou erro)
+    const figurinha = {
+      id: Date.now(),  // Criando um ID único com base no timestamp
+      imagem: status === "sucesso" ? sucesso : erro,  // Seleciona a imagem correspondente
+      nome: status === "sucesso" ? "Missão Concluída com Sucesso" : "Missão Erro",
+    };
 
-  if (!inventario.some((f) => f.id === figurinha.id)) {
-    inventario.push(figurinha);
-  }
+    // Adiciona a figurinha ao inventário, se não estiver presente
+    if (!inventario.some((f) => f.id === figurinha.id)) {
+      inventario.push(figurinha);
+    }
 
-  localStorage.setItem("inventario", JSON.stringify(inventario));
-};
-  const concluirMissao = (id) => {
+    localStorage.setItem("inventario", JSON.stringify(inventario));
+  };
+
+  const concluirMissao = (id, status) => {
     if (!missoesConcluidas.includes(id)) {
       const missao = missoes.find((m) => m.id === id);
-      salvarFigurinha(missao);
+      salvarFigurinha(missao, status); // Salva a figurinha com o status
       setMissoesConcluidas((prev) => [...prev, id]);
     }
 
@@ -64,7 +72,7 @@ export function Missao() {
         <MissaoModal
           missao={missaoSelecionada}
           onClose={() => setMissaoSelecionada(null)}
-          onConcluir={() => concluirMissao(missaoSelecionada.id)}
+          onConcluir={(status) => concluirMissao(missaoSelecionada.id, status)} // Passando o status aqui
         />
       )}
     </section>
