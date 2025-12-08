@@ -1,50 +1,69 @@
-import missao from '../assets/missoes.png';
-import mapa from '../assets/mapa.png';
-import inventario from '../assets/inventario.png';
-import camera from '../assets/camera.png';
-import { Link } from 'react-router-dom';
-
+import missao from "../assets/missoes.png";
+import mapa from "../assets/mapa.png";
+import inventario from "../assets/inventario.png";
+import camera from "../assets/camera.png";
+import { Link } from "react-router-dom";
 
 export function Menu() {
   return (
-    <nav className="menu" aria-label="Menu principal">
-      <ul>
+    <nav className="menu" aria-label="menu principal">
+      <ul role="list">
         <li>
-          {/* Missões */}
-          <Link to="missao" aria-label="Ir para Missões">
+          {/* link para a pagina de missoes */}
+          <Link to="missao" aria-label="ir para missoes">
             <figure>
-              <img src={missao} alt="Ícone de Missões" loading="lazy" />
-              <figcaption>Missões</figcaption>
+              <img
+                src={missao}
+                alt="ícone de missoes"
+                loading="lazy"
+                decoding="async"
+              />
+              <figcaption>missões</figcaption>
             </figure>
           </Link>
         </li>
 
         <li>
-          {/* Inventário */}
-          <Link to="inventario" aria-label="Abrir Inventário">
+          {/* link para inventario */}
+          <Link to="inventario" aria-label="abrir inventario">
             <figure>
-              <img src={inventario} alt="Ícone de Inventário" loading="lazy" />
-              <figcaption>Inventário</figcaption>
+              <img
+                src={inventario}
+                alt="ícone do inventario"
+                loading="lazy"
+                decoding="async"
+              />
+              <figcaption>inventário</figcaption>
             </figure>
           </Link>
         </li>
 
         <li>
-          {/* Mapa */}
-          <Link to="/mapa" aria-label="Abrir Mapa">
+          {/* link para mapa */}
+          <Link to="geoLocalizacao" aria-label="abrir mapa">
             <figure>
-              <img src={mapa} alt="Ícone de Mapa" loading="lazy" />
-              <figcaption>Mapa</figcaption>
+              <img
+                src={mapa}
+                alt="ícone de mapa"
+                loading="lazy"
+                decoding="async"
+              />
+              <figcaption>mapa</figcaption>
             </figure>
           </Link>
         </li>
 
         <li>
-          {/* Camera */}
-          <Link to="camera" aria-label="Abrir Câmera">
+          {/* link para camera */}
+          <Link to="camera" aria-label="abrir camera">
             <figure>
-              <img src={camera} alt="Ícone de Câmera" loading="lazy" />
-              <figcaption>Câmera</figcaption>
+              <img
+                src={camera}
+                alt="ícone de camera"
+                loading="lazy"
+                decoding="async"
+              />
+              <figcaption>câmera</figcaption>
             </figure>
           </Link>
         </li>

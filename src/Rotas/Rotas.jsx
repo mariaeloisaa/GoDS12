@@ -3,10 +3,9 @@ import { Routes, Route } from "react-router-dom";
 import { Inicial } from "../Paginas/Inicial";
 import { DSGo } from "../Paginas/DSGo";
 import { Missao} from "../Paginas/Missao";
-// import { Camera } from "../Componentes/Camera";
 import { Galeria } from "../Paginas/Galeria";
 import { Inventario } from "../Paginas/Inventario";
-// import { GeolocalizacaoMapa } from "../Componentes/GeolocalizacaoMapa";
+import { Geolocalizacao } from "../Paginas/GeoLocalizacao";
 
 export function Rotas() {
     return (
@@ -17,6 +16,7 @@ export function Rotas() {
                 <Route path="missao" element={<Missao />} /> 
                 <Route path="inventario" element={<Inventario/>} /> 
                 <Route path="camera" element={<Galeria/>} />
+                <Route path="geoLocalizacao" element={<Geolocalizacao/>} />
             </Route>   
         </Routes>
     );

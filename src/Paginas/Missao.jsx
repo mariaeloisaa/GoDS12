@@ -3,7 +3,7 @@ import { missoes } from "../Dados/dadosMissao";
 import { MissaoCard } from "../Componentes/MissaoCard";
 import { MissaoModal } from "../Componentes/MissaoModal";
 import sucesso from "../assets/correto.jpg";
-import erro from "../assets/incorreto.jpg"; // Imagens de sucesso e erro
+import erro from "../assets/incorreto.jpg";
 
 export function Missao() {
   const [missaoSelecionada, setMissaoSelecionada] = useState(null);
@@ -15,54 +15,61 @@ export function Missao() {
 
   const headerRef = useRef(null);
 
+  // salva progresso das missoes no local storage
   useEffect(() => {
     localStorage.setItem("missoesConcluidas", JSON.stringify(missoesConcluidas));
   }, [missoesConcluidas]);
 
-  // Função para salvar a figurinha no inventário com base no resultado
-  const salvarFigurinha = (missao, status) => {
+  // salva figurinha baseada no status da missão
+  const salvarFigurinha = (status) => {
     const inventario = JSON.parse(localStorage.getItem("inventario")) || [];
 
-    // A figurinha a ser salva será definida com base no status (sucesso ou erro)
     const figurinha = {
-      id: Date.now(),  // Criando um ID único com base no timestamp
-      imagem: status === "sucesso" ? sucesso : erro,  // Seleciona a imagem correspondente
-      nome: status === "sucesso" ? "Missão Concluída com Sucesso" : "Missão Erro",
+      id: Date.now(),
+      imagem: status === "sucesso" ? sucesso : erro,
+      nome: status === "sucesso" ? "Missão Concluída" : "Missão com Erro"
     };
 
-    // Adiciona a figurinha ao inventário, se não estiver presente
-    if (!inventario.some((f) => f.id === figurinha.id)) {
-      inventario.push(figurinha);
-    }
-
+    inventario.push(figurinha);
     localStorage.setItem("inventario", JSON.stringify(inventario));
   };
 
+  // marca missão como concluída
   const concluirMissao = (id, status) => {
     if (!missoesConcluidas.includes(id)) {
-      const missao = missoes.find((m) => m.id === id);
-      salvarFigurinha(missao, status); // Salva a figurinha com o status
+      salvarFigurinha(status);
       setMissoesConcluidas((prev) => [...prev, id]);
     }
-
     setMissaoSelecionada(null);
   };
 
+  // foco inicial para acessibilidade
   useEffect(() => {
     if (headerRef.current) headerRef.current.focus();
   }, []);
 
   return (
-    <section className="conteiner">
-      <h2 ref={headerRef} tabIndex={0}>Missões</h2>
+    <section
+      className="conteiner"
+      aria-labelledby="titulo-missoes"
+      role="region"
+    >
+      <h2 id="titulo-missoes" ref={headerRef} tabIndex={0}>
+        Missões
+      </h2>
 
-      <div className="missoes-grid">
+      <div
+        className="missoes-grid"
+        role="list"
+        aria-label="lista de missões disponíveis"
+      >
         {missoes.map((m) => (
-          <div key={m.id}>
+          <div key={m.id} role="listitem">
             <MissaoCard
               missao={m}
               onIniciarMissao={setMissaoSelecionada}
               concluida={missoesConcluidas.includes(m.id)}
+              aria-label={`missão ${m.titulo}`}
             />
           </div>
         ))}
@@ -72,7 +79,7 @@ export function Missao() {
         <MissaoModal
           missao={missaoSelecionada}
           onClose={() => setMissaoSelecionada(null)}
-          onConcluir={(status) => concluirMissao(missaoSelecionada.id, status)} // Passando o status aqui
+          onConcluir={(status) => concluirMissao(missaoSelecionada.id, status)}
         />
       )}
     </section>
